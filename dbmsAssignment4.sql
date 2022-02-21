@@ -50,15 +50,11 @@ select min(price.price) from price where price.bus_type="Sleeper";
 select passenger.passenger_name from passenger where passenger.passenger_name like 'S%';
 
 -- 6)	Calculate price charged for each passenger displaying Passenger name, Boarding City,Destination City, Bus_Type, Price in the output
-select category.* from `order` inner join product_details on `order`.prod_id=product_details.prod_id inner join 
-product on product.pro_id=product_details.pro_id inner join category on category.cat_id = product.cat_id having min(`order`.ord_amount);
+
 
 -- 7)	What are the passenger name/s and his/her ticket price who travelled in the Sitting bus for a distance of 1000 KM s
-select product.pro_id,product.pro_name from `order` inner join product_details on product_details.prod_id=`order`.prod_id
- inner join product on product.pro_id=product_details.pro_id where `order`.ord_date>"2021-10-05";
 
 -- 8)	What will be the Sitting and Sleeper bus charge for Pallavi to travel from Bangalore to Panaji?
-select customer.cus_name, customer.cus_gender from customer where customer.cus_name like 'A%' or customer.cus_name like '%A';
 
 -- 9)	List the distances from the "Passenger" table which are unique (non-repeated distances) in descending order.
 select distinct passenger.distance from passenger order by distance DESC;
