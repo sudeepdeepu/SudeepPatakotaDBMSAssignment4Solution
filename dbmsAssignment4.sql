@@ -44,10 +44,10 @@ INSERT INTO `price` VALUES("Sitting",1500,1860);
 select count(passenger.gender) as count from passenger where `passenger`.distance>=600 group by passenger.gender;
 
 -- 4)	Find the minimum ticket price for Sleeper Bus.
-select `order`.*,product.pro_name from `order`,product_details,product where `order`.cus_id=2 and `order`.prod_id=product_details.prod_id and product_details.prod_id=product.pro_id;
+select min(price.price) from price where price.bus_type="Sleeper";
 
 -- 5)	Select passenger names whose names start with character 'S'
-select supplier.* from supplier,product_details where supplier.supp_id in (select product_details.supp_id from product_details group by product_details.supp_id having count(product_details.supp_id)>1) group by supplier.supp_id;
+select passenger.passenger_name from passenger where passenger.passenger_name like 'S%';
 
 -- 6)	Calculate price charged for each passenger displaying Passenger name, Boarding City,Destination City, Bus_Type, Price in the output
 select category.* from `order` inner join product_details on `order`.prod_id=product_details.prod_id inner join 
@@ -61,12 +61,7 @@ select product.pro_id,product.pro_name from `order` inner join product_details o
 select customer.cus_name, customer.cus_gender from customer where customer.cus_name like 'A%' or customer.cus_name like '%A';
 
 -- 9)	List the distances from the "Passenger" table which are unique (non-repeated distances) in descending order.
-select supplier.supp_id,supplier.supp_name,rating.rat_ratstars,
-CASE
-	WHEN rating.rat_ratstars > 4 THEN 'Genius Supplier'
-    WHEN rating.rat_ratstars > 2 THEN 'Average Supplier'
-    ELSE 'Supplier should not be considered'
-END AS verdict from rating inner join supplier on supplier.supp_id = rating.supp_id;
+select distinct passenger.distance from passenger order by distance DESC;
 
 -- 10)	Display the passenger name and percentage of distance travelled by that passengerfrom the total distance travelled by all passengers without using user variables
 
